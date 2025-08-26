@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+// App.js
+
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeScreen from "./components/HomeScreen";
+import SettingsScreen from "./components/SettingScreen";
+import { ThemeProvider } from "./components/ThemeContext";
+import GraphScreen from "./components/GraphScreen";
+import { AlertProvider } from "./components/AlertContext";
+import { MqttProvider } from "./components/MqttContext";
+
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider>
+      <AlertProvider>
+        <MqttProvider>
+
+        
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
+          <Stack.Screen name="Graph" component={GraphScreen} />
+
+        </Stack.Navigator>
+      </NavigationContainer>
+      </MqttProvider>
+      </AlertProvider>
+    </ThemeProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
+
