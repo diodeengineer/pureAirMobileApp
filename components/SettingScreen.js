@@ -6,7 +6,7 @@ import { View, Text, StyleSheet, Switch, TextInput,Linking } from "react-native"
 import { useTheme } from "./ThemeContext";
 import { useAlerts } from "./AlertContext";
 import ConnectDevice from "./ConnectDevice";
-import {DOC_LINK} from "@env"
+import {DOC_LINK, LIC_LINK} from "@env"
 
 
 export default function SettingsScreen() {
@@ -63,9 +63,19 @@ const { alertsEnabled, setAlertsEnabled } = useAlerts();
   >
     Documentation / Tutorial
   </Text>
-  <Text style={[styles.cardDesc, { color: isDark ? "#aaa" : "#333" }]}>
-    © 2025 PureAir. All rights reserved.
-  </Text>
+  
+  
+  <Text
+  style={[
+    styles.cardDesc,
+    { color: isDark ? "#4cafef" : "#1976d2", textDecorationLine: "underline" },
+  ]}
+  onPress={() => Linking.openURL(LIC_LINK)}
+>
+  📜 Licensed under MIT
+</Text>
+
+
 </View>
 
 
@@ -87,7 +97,7 @@ const styles = StyleSheet.create({
 
 
   card: {
-  padding: 20,
+  padding: 30,
   borderRadius: 20,
   marginVertical: 12,
   width: "100%",
